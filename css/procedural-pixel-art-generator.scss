@@ -1,0 +1,311 @@
+@import 'utilities';
+@import 'radio-group';
+
+
+#examples {
+  img {
+    @extend %nofiltering;
+    width: 128px;
+    height: 128px;
+    margin-right: 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    padding: 0.5em;
+    
+    &:hover {
+      background: color(button);
+    }
+  }
+}
+
+canvas {
+  @extend %nofiltering;
+}
+
+#pixel-demo {
+  display: flex;
+  margin: 2em 0 0 0;
+  user-select: none;
+  align-items: flex-start;
+  
+  &>div:not(:first-child) {
+    margin-left: 2em;
+    
+    h3:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  .eraser {
+    border: none;
+    background: color(button);
+    padding: 0.5rem 0.75rem; 
+    cursor: pointer;
+     
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  
+  &.eraser {
+    .canvas-holder {
+      cursor: url(/images/procedural-pixel-art-generator/eraser.png), auto !important;
+    }
+    .color-selection .selection {
+      opacity: 0;
+      border-color: color(base);
+      pointer-events: none;
+    }
+    button.eraser {
+      outline: solid 0.5em color(indent);
+    }
+  }
+}
+
+#main-canvas {
+  padding: 1em 1em 0 1em;
+  position: relative;
+  background: color(indent);
+
+  #layer-selected {
+    display: flex;
+    justify-content: space-between;
+    
+    label {
+      padding: 0.5em 1em;
+      cursor: pointer;
+      display: inline-block;
+      &:hover {
+        background: color(base);
+      }
+    }
+    input {
+      display: none;
+      
+      &:checked + label{
+        color: lighten($base-color, 70%);
+        background: $radio-color;
+      }
+    }
+    
+    //label
+    strong { 
+      align-self: center; 
+      margin-right: 0.5em;
+    }
+    
+    //spacer
+    &>div {
+      flex-grow: 1;
+    }
+    
+    //clear button
+    button#clear-canvas {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5em 0.75em;
+      
+      svg {
+        width: 1.75em; 
+        height: 1.75em;
+        path {
+          fill: color(indent,foreground,symbol);
+        }
+      }
+      
+      &:hover {
+        background: color(button);
+        svg path {
+          fill: color(button,foreground);
+        }
+      }
+      
+    }
+  }
+  
+  .canvas-holder {
+    cursor: url(/images/pixel-art-where-to-start/pencil-tool-cursor.png), auto;
+    background: white;
+
+    canvas {
+      margin: 0 auto;
+      display: block;
+      transition: width 100ms, height 100ms;
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      pointer-events: none;
+      background-color: white;
+
+    }
+    &.onion canvas {background-color: transparent;}
+    &:not(.onion) canvas.selected {z-index: 200 !important;}
+    
+    .gridline {
+  
+      background: black;
+      position: absolute;
+      
+      &.horizontal {
+        width: 1px;
+        height: calc(100% - 2em);
+        top: 1em;
+        left: 50%;
+        border-left: solid 1px white;
+      }
+      
+      &.vertical {
+        width: calc(100% - 2em);
+        height: 1px;
+        top: 50%;
+        left: 1em;
+        border-top: solid 1px white;
+      }
+    }
+  }
+}
+
+.checkbox-holder {
+  @include formcheck();
+}
+
+.text-holder {
+  @include formtext();
+  
+  input {
+    width: 2em;
+    text-align: center;
+  }
+}
+
+.chance-selection {
+  display: flex;
+  
+  button {
+    height: 3em;
+    border: none;
+    border-bottom: solid 0.5em rgba(0,0,0,0.4);
+    cursor: pointer;
+    margin-bottom: 1em;
+    transition: margin-top 200ms, height 200ms, border-bottom-width 150ms;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    flex: 0 0 25%;
+    
+    //colors
+    &:nth-child(1) {color: white}
+    &:nth-child(2) {color: white}
+    
+    //background colors
+    &:nth-child(1) {background-color: color(button)}
+    &:nth-child(2) {background-color: lighten(color(button),25%)}
+    &:nth-child(3) {background-color: lighten(color(button),50%)}
+    &:nth-child(4) {background-color: lighten(color(button),75%)}
+    
+    
+    //curved edges
+    &:first-child {border-radius: 2px 0 0 2px;}
+    &:last-child {border-radius: 0 2px 2px 0;}
+    
+    &:active, &.current-selection {
+      margin-top: 0.5em;
+      height: 2.5em;
+      border-bottom-width: 0px;
+    }
+  }
+}
+
+.color-selection {
+  position: relative;
+  
+  .selection {
+      width: 3em;
+      height: 3em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      outline: solid 0.5em color(button,background,hover);
+      z-index: 10;
+      transition: all 200ms;
+  }
+  
+  .color {
+    display: flex;
+    align-items: center;
+    
+    &:nth-child(1) .palette-color {background-color: #ff0000}
+    &:nth-child(2) .palette-color {background-color: #00ff00}
+    &:nth-child(3) .palette-color {background-color: #0000ff}
+    &:nth-child(4) .palette-color {background-color: #00ffff}
+    &:nth-child(5) .palette-color {background-color: #ff00ff}
+    &:nth-child(6) .palette-color {background-color: #ffff00}
+    &:nth-child(7) .palette-color {background-color: #000000}
+    
+    .palette-color {
+      width: 3rem;
+      height: 3rem;
+      border: none;
+      cursor: url(/images/procedural-pixel-art-generator/eyedropper.png), auto;
+    }
+    .jscolor {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: solid 0.25em color(indent);
+    }
+    &>strong {
+      padding: 0 0.5em 0 1em;
+    }
+  }
+}
+
+#output {
+  margin: 1em 0;
+  
+  canvas {
+    border: solid 1px color(base,background,lighthover);
+    border-radius: 0.5em;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    cursor: pointer;
+    
+    &:hover {
+      background: color(base,background,lighthover);
+    }
+  }
+}
+
+.settings-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  
+  &>* {
+    margin-right: 2em;
+  }
+}
+
+.export-holder, .import-holder {
+  display: none;
+}
+
+@media (max-width: 830px) {
+  #pixel-demo {
+    flex-direction: column;
+  }
+  
+  #canvas-sidebar {
+    flex-direction: row;
+    margin-left: 0;
+    margin-top: 2em;
+  }
+  
+  #color-palette {
+    margin-bottom: 0;
+    button {
+      flex: 1 1 calc(25% - 1em);
+    }
+  }
+  
+}

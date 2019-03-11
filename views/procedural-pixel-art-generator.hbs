@@ -1,0 +1,141 @@
+<h1>{{title}}</h1>
+
+<p>This is a small (mostly experimental) tool used to created randomized sprites, which you can use as assets for a game, or just for art/fun.
+Draw your sprite below using the 6-color palette, lower the chance to generate to add randomized pixels, then hit generate to get your random sprite.
+It works best with small simple sprites, without shading or texture (which it's not great at).
+</p>
+
+<h3>Examples:</h3>
+
+<div id="examples">
+  <img title="sword" src="/procedural-pixel-art-generator/sword.png" />
+  <img title="shield" src="/procedural-pixel-art-generator/shield.png" />
+  <img title="alien" src="/procedural-pixel-art-generator/alien.png" />
+  <img title="spaceship" src="/procedural-pixel-art-generator/spaceship.png" />
+</div>
+
+
+<div id="pixel-demo">
+  <div id="main-canvas">
+    <div class="canvas-holder onion">
+      <canvas></canvas>
+      <canvas class="selected"></canvas>
+      <canvas></canvas>
+    </div>
+    <div class="gridline horizontal"></div>
+    <div class="gridline vertical"></div>
+
+    <div id="layer-selected">
+      <strong>Layers:</strong> 
+        <input type="radio" id="option-one" name="layer-selected" value="1" autocomplete="off"/><label for="option-one">Top</label>
+        <input type="radio" id="option-two" name="layer-selected" value="2" autocomplete="off" checked/><label for="option-two">Middle</label>
+        <input type="radio" id="option-three" name="layer-selected" value="3" autocomplete="off"/><label for="option-three">Bottom</label>
+        <div></div>
+        <button id="clear-canvas" title="Clear layer">{{svg "trash"}}</button>
+    </div>
+
+  </div>
+  
+  <div>
+    
+    <h3>Palette</h3>
+    <div class="color-selection">
+      
+      <div class="color">
+        <button class="palette-color current-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'d24040',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="color">
+        <button class="palette-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'10c840',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="color">
+        <button class="palette-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'00a0c8',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="color">
+        <button class="palette-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'736464',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="color">
+        <button class="palette-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'a0694b',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="color">
+        <button class="palette-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'fac800',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="color">
+        <button class="palette-color"></button> 
+        <strong>=</strong> 
+        <button class="jscolor {valueElement:null,value:'101820',borderWidth:0,insetColor:'transparent'}"></button>
+      </div>
+      
+      <div class="selection"></div>
+    </div>
+    
+    <h3>Chance to generate</h3>
+    <div class="chance-selection">
+      <button data-alpha="0.25">25%</button>
+      <button data-alpha="0.5">50%</button>
+      <button data-alpha="0.75">75%</button>
+      <button data-alpha="1" class="current-selection">100%</button>
+    </div>
+    
+    <button class="eraser" title="eraser">{{svg "eraser"}}</button>
+  </div>
+  
+  <div>
+    <h3>Drawing Settings</h3>
+
+    {{checkbox "mirror-drawing-x" label="Mirror Horizontally" default="true"}}
+    {{checkbox "mirror-drawing-y" label="Mirror Vertically" default="false"}}
+    
+    
+    <h3>Templates</h3>
+    <button class="link-button import">Import</button>
+    <button class="link-button export">Export</button>
+  </div>
+</div>
+
+<div class="settings-container">
+{{checkbox "center-pixel" label="Single pixel center line" default="true"}}
+{{checkbox "onion-skin" label="Onion Skin Layers" default="true"}}
+</div>
+
+<h3>Generation Settings</h3>
+
+<div class="settings-container">
+  {{checkbox "mirror-generation-x" label="Mirror Horizontally" default="false"}}
+  {{checkbox "mirror-generation-y" label="Mirror Vertically" default="false"}}
+  {{checkbox "draw-outline" label="Draw Outline" default="true"}}
+  {{checkbox "remove-single-pixels" label="Remove stray pixels" default="true"}}
+  {{text "variations" label="Sprites to generate" default="12"}}
+</div>
+<div>
+  <button class="generate link-button">Generate</button>
+</div>
+<h2>Generated Sprites</h2>
+
+
+<div id="output">
+  Press generate above to create sprites!
+</div>
+
+<button id="download-sprite-sheet" class="link-button">Download Sprite Sheet</button>
+
+<a class="export-holder" href="" download="lospec-procedural-pixel-art-generator-settings.json"></a>
+<a id="download-holder" href="" download="prodcedural-pixel-art.png"></a>
+<input class="import-holder" type="file" accept=".json"/>
