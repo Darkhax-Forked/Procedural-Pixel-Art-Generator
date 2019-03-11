@@ -4,6 +4,18 @@ This is a browser based tool used to create a template which can generate random
 
 The tool can be viewed online here: https://lospec.com/procedural-pixel-art-generator/
 
+## What to Contribute
+
+Any changes that fix bugs or add features are welcome.
+
+Suggestions / Planned features:
+
+- Mobile support
+- Variable canvas size
+- More Layers
+- More Colors
+- Color variations (choose a color randomly)
+
 ## How to Contribute
 
 1. Click **Fork** above. It will automatically create a copy of this repository and add it to your account. 

@@ -1,6 +1,8 @@
-@import 'utilities';
-@import 'radio-group';
-
+@import 'colors';
+@import 'utilities/no-filtering';
+@import 'utilities/formcheck';
+@import 'utilities/formtext';
+@import 'utilities/no-select';
 
 #examples {
   img {
@@ -50,7 +52,7 @@ canvas {
   
   &.eraser {
     .canvas-holder {
-      cursor: url(/images/procedural-pixel-art-generator/eraser.png), auto !important;
+      cursor: url(/procedural-pixel-art-generator/eraser.png), auto !important;
     }
     .color-selection .selection {
       opacity: 0;
@@ -85,7 +87,7 @@ canvas {
       
       &:checked + label{
         color: lighten($base-color, 70%);
-        background: $radio-color;
+        background: color(base, foreground);
       }
     }
     
@@ -126,7 +128,7 @@ canvas {
   }
   
   .canvas-holder {
-    cursor: url(/images/pixel-art-where-to-start/pencil-tool-cursor.png), auto;
+    cursor: url(/pixel-art-where-to-start/pencil-tool-cursor.png), auto;
     background: white;
 
     canvas {
@@ -246,7 +248,7 @@ canvas {
       width: 3rem;
       height: 3rem;
       border: none;
-      cursor: url(/images/procedural-pixel-art-generator/eyedropper.png), auto;
+      cursor: url(/procedural-pixel-art-generator/eyedropper.png), auto;
     }
     .jscolor {
       width: 2.5rem;

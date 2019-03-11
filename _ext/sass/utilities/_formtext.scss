@@ -1,0 +1,16 @@
+//(to use: @include formtext(); on .text-holder
+
+@mixin formtext() {
+  display: flex;
+  margin: 1em 0;
+  align-items: center;
+  
+  input {
+    color: color(base, foreground, text);
+    background: color(indent);
+    border: none;
+    padding: 1em;
+    border-radius: 0.5em;
+    margin-right: 0.5em;
+  }
+}

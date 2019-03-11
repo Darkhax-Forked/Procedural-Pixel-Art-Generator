@@ -1,0 +1,47 @@
+//(to use: @include formcheck();)
+
+@mixin formcheck() {
+  display: flex;
+  margin: 1em 0;
+  @extend %noselect;
+  
+  
+  input[type="checkbox"] {
+    display: none;
+    
+    &:checked+label .box svg {
+      visibility: visible;
+    }
+  }
+  
+  label {
+    display: flex;
+    cursor: pointer;
+    
+    .box {
+      color: color(base, foreground, text);
+      background: color(indent);
+      border: none;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      box-sizing: border-box;
+      margin-right: 0.5rem;
+      display: inline-block;
+      vertical-align: middle;
+      
+      svg {
+        visibility: hidden;
+        width: 1em;
+        height: 1em;
+        display: block;
+        path { fill: color(base, foreground) }
+      }
+    }
+  }
+  
+  div.text {
+    display: flex; 
+    justify-content: center;
+    flex-direction: column;
+  }
+}
