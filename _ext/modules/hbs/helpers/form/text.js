@@ -4,7 +4,7 @@ var fs = require('fs');
 module.exports = function(fieldName,args) {
   
   //get template
-  var template = fs.readFileSync('views/utilities/form-text.hbs', 'utf8');
+  var template = fs.readFileSync('modules/hbs/form/form-text.hbs', 'utf8');
   template = hbs.compile(template);
 
   //apply template

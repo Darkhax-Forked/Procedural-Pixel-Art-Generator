@@ -4,7 +4,7 @@ var fs = require('fs');
 module.exports = function(fieldName,args) {
   
   //get template
-  var template = fs.readFileSync('views/utilities/form-check.hbs', 'utf8');
+  var template = fs.readFileSync('modules/hbs/form/form-check.hbs', 'utf8');
   template = hbs.compile(template);
 
   var selected = false;
